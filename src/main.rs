@@ -1,31 +1,17 @@
 mod app;
-mod audio;
-mod config;
-mod de_adaptive;
+mod cavalry;
+mod core;
 mod diagnostics;
-mod ffmpeg;
-mod gpu_tuner;
-mod i18n;
-mod installer;
-mod logging;
-mod logs;
-mod memory;
-mod path_translator;
-mod perf_tuner;
-mod projects;
-mod qol_tools;
-mod repair;
-mod swap_manager;
-mod sys_info;
-mod tray;
-mod wine;
+mod system;
 
 slint::include_modules!();
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    logging::init();
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    core::logging::init();
 
-    let _config = config::GallopConfig::load();
+    let _config = core::config::CavarluxConfig::load();
+    let _ = core::projects::ProjectManager::register_linux_mime_association();
 
     let ui = AppWindow::new()?;
 
