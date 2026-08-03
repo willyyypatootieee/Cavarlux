@@ -308,6 +308,6 @@ mod tests {
         let ver = DistroInfo::kernel_version();
         assert!(!ver.is_empty());
         let (major, _minor) = DistroInfo::kernel_version_tuple();
-        assert!(major >= 4); 
+        assert!(major >= 4);
     }
 }
